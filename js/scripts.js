@@ -41,3 +41,11 @@ newGame.switchPlayers();
 newGame.switchPlayers();
 
 console.log(newGame.players);
+
+// User Interface Logic ----------
+$(document).ready(function() {
+  $("form#game-info").submit(function(event) {
+    event.preventDefault();
+    const playerName = $("input#name").val();
+  });
+});
