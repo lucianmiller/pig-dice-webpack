@@ -30,9 +30,6 @@ function rollD6() {
   return Math.floor(Math.random() * (7 - 1) + 1);
 }
 
-// let newGame = new Game();
-
-// let player1 = new Player("Fred");
 // let player2 = new Player("Bob");
 
 // newGame.addPlayers(player1, player2);
@@ -44,9 +41,21 @@ function rollD6() {
 
 // User Interface Logic ----------
 $(document).ready(function() {
+  $("#start-game").on("click", function() {
+    $("form#game-info").hide()
+  });
+  let newGame = new Game();
   $("form#game-info").submit(function(event) {
     event.preventDefault();
     const playerName = $("input#name").val();
-    console.log(playerName);
+    const numberOfPlayers = parseInt($("#number-of-players").val());
+    if ((newGame.players.length) < numberOfPlayers) {
+      let player = new Player(playerName);
+      newGame.addPlayers(player);
+    } else {
+      $("#output").text("You have the max number of players! Hit start game to begin!")
+    }
+    console.log(newGame);
+    console.log(numberOfPlayers);
   });
 });
