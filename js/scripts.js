@@ -42,7 +42,15 @@ function rollD6() {
 // User Interface Logic ----------
 $(document).ready(function() {
   $("#start-game").on("click", function() {
-    $("form#game-info").hide()
+    $("form#game-info").hide();
+    $("#start-game").hide();
+    $("#buttons").show();
+  });
+  $("#roll").on("click", function() {
+    rollD6();
+  });
+  $("#hold").on("click", function() {
+    // Will hold turn
   });
   let newGame = new Game();
   $("form#game-info").submit(function(event) {
