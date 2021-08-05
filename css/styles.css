@@ -1,3 +1,7 @@
 #buttons {
   display: none;
 }
+
+#current-player {
+  display: none;
+}
