@@ -47,7 +47,7 @@ $(document).ready(function() {
     $("#buttons").show();
   });
   $("#roll").on("click", function() {
-    rollD6();
+    $("#output").text(rollD6());
   });
   $("#hold").on("click", function() {
     // Will hold turn
