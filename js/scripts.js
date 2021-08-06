@@ -40,6 +40,12 @@ Game.prototype.calculateScore = function(points) {
   console.log("current score: " + this.currentScore);
 }
 
+Game.prototype.totalScore = function() {
+  this.players[this.currentPlayer].score += this.currentScore;
+  this.currentScore = 0;
+  console.log("total score: " + this.players[this.currentPlayer].score);
+}
+
 // User Interface Logic ----------
 displayGameInfo = function(game) {
   $("#current-player").show();
@@ -47,7 +53,6 @@ displayGameInfo = function(game) {
   $("#current-score").text(`Current score: ${game.currentScore}`);
   $("#total-score").text(`Total Score: ${game.players[game.currentPlayer].score}`);
 }
-
 
 $(document).ready(function() {
   $("#start-game").on("click", function() {
@@ -63,18 +68,21 @@ $(document).ready(function() {
     displayGameInfo(newGame);
   });
   $("#hold").on("click", function() {
-    // Will hold turn
+    newGame.totalScore();
+    newGame.switchPlayers();
   });
   let newGame = new Game();
   $("form#game-info").submit(function(event) {
     event.preventDefault();
     const playerName = $("input#name").val();
     const numberOfPlayers = parseInt($("#number-of-players").val());
-    if ((newGame.players.length) < numberOfPlayers) {
+    if (newGame.players.length < numberOfPlayers) {
       let player = new Player(playerName);
       newGame.addPlayers(player);
-    } else {
-      $("#output").text("You have the max number of players! Hit start game to begin!")
+    }
+    if (newGame.players.length == numberOfPlayers) {
+      $("#start-game").show();
+      $("#add-player").hide();
     }
     console.log(newGame);
     console.log(numberOfPlayers);
