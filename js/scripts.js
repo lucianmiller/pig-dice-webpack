@@ -2,7 +2,7 @@
 function Game() {
   this.players = [];
   this.currentScore = 0;
-  this.currentPlayer = 0;
+  this.currentPlayerIndex = 0;
   this.maxPlayers = 2;
 }
 
@@ -16,10 +16,10 @@ Game.prototype.addPlayers = function(...playerObjects) {
 }
 
 Game.prototype.switchPlayers = function() {
-  if (this.currentPlayer + 1 != this.maxPlayers) {
-    this.currentPlayer += 1;
-  } else if (this.currentPlayer + 1 == this.maxPlayers) {
-    this.currentPlayer = 0;
+  if (this.currentPlayerIndex + 1 != this.maxPlayers) {
+    this.currentPlayerIndex += 1;
+  } else if (this.currentPlayerIndex + 1 == this.maxPlayers) {
+    this.currentPlayerIndex = 0;
   }
 }
 
@@ -37,16 +37,16 @@ Game.prototype.calculateScore = function(points) {
 }
 
 Game.prototype.totalScore = function() {
-  this.players[this.currentPlayer].score += this.currentScore;
+  this.players[this.currentPlayerIndex].score += this.currentScore;
   this.currentScore = 0;
 }
 
 // User Interface Logic ----------
 displayGameInfo = function(game) {
   $("#current-player").show();
-  $("#player-name").text(`Current Player: ${game.players[game.currentPlayer].name}`);
+  $("#player-name").text(`Current Player: ${game.players[game.currentPlayerIndex].name}`);
   $("#current-score").text(`Current score: ${game.currentScore}`);
-  $("#total-score").text(`Total Score: ${game.players[game.currentPlayer].score}`);
+  $("#total-score").text(`Total Score: ${game.players[game.currentPlayerIndex].score}`);
 }
 
 $(document).ready(function() {
@@ -61,26 +61,27 @@ $(document).ready(function() {
     newGame.calculateScore(roll);
     $("#output").text(roll);
     displayGameInfo(newGame);
-    if (newGame.currentScore + newGame.players[newGame.currentPlayer].score >= 100) {
-      $("#roll").hide()
-      $("#hold").hide()
-      $("#output").text(`Congratulations! ${newGame.players[newGame.currentPlayer].name} Won the game! Refresh the webpage to play again!`)
-    }
   });
   $("#hold").on("click", function() {
     newGame.totalScore();
+    displayGameInfo(newGame);
+    if (newGame.players[newGame.currentPlayerIndex].score >= 100) {
+      $("#roll").hide();
+      $("#hold").hide();
+      $("#output").text(`Congratulations! ${newGame.players[newGame.currentPlayerIndex].name} Won the game! Refresh the webpage to play again!`);
+    }
     newGame.switchPlayers();
   });
   let newGame = new Game();
   $("form#game-info").submit(function(event) {
     event.preventDefault();
     const playerName = $("input#name").val();
-    const numberOfPlayers = parseInt($("#number-of-players").val());
-    if (newGame.players.length < numberOfPlayers) {
+    const maxNumberOfPlayers = parseInt($("#number-of-players").val());
+    if (newGame.players.length < maxNumberOfPlayers) {
       let player = new Player(playerName);
       newGame.addPlayers(player);
     }
-    if (newGame.players.length == numberOfPlayers) {
+    if (newGame.players.length == maxNumberOfPlayers) {
       $("#start-game").show();
       $("#add-player").hide();
     }
