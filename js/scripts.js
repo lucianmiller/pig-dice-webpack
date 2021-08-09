@@ -21,7 +21,6 @@ Game.prototype.switchPlayers = function() {
   } else if (this.currentPlayer + 1 == this.maxPlayers) {
     this.currentPlayer = 0;
   }
-  console.log("current player: " + this.currentPlayer);
 }
 
 function rollD6() {
@@ -35,15 +34,11 @@ Game.prototype.calculateScore = function(points) {
     this.currentScore = 0;
     this.switchPlayers();
   }
-  
-  console.log("points: " + points);
-  console.log("current score: " + this.currentScore);
 }
 
 Game.prototype.totalScore = function() {
   this.players[this.currentPlayer].score += this.currentScore;
   this.currentScore = 0;
-  console.log("total score: " + this.players[this.currentPlayer].score);
 }
 
 // User Interface Logic ----------
@@ -89,7 +84,5 @@ $(document).ready(function() {
       $("#start-game").show();
       $("#add-player").hide();
     }
-    console.log(newGame);
-    console.log(numberOfPlayers);
   });
 });
