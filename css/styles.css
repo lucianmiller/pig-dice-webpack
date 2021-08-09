@@ -9,3 +9,7 @@
 #current-player {
   display: none;
 }
+
+#output {
+  font-size: 130%;
+}
