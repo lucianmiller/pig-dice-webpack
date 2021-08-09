@@ -66,6 +66,11 @@ $(document).ready(function() {
     newGame.calculateScore(roll);
     $("#output").text(roll);
     displayGameInfo(newGame);
+    if (newGame.currentScore + newGame.players[newGame.currentPlayer].score >= 100) {
+      $("#roll").hide()
+      $("#hold").hide()
+      $("#output").text(`Congratulations! ${newGame.players[newGame.currentPlayer].name} Won the game! Refresh the webpage to play again!`)
+    }
   });
   $("#hold").on("click", function() {
     newGame.totalScore();
