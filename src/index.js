@@ -1,48 +1,12 @@
-// Business Logic -----------
-function Game() {
-  this.players = [];
-  this.currentScore = 0;
-  this.currentPlayerIndex = 0;
-  this.maxPlayers = 2;
-}
+import $ from 'jquery';
+import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './css/styles.css';
+import Game from './game.js';
+import Player from './player.js';
+import rollD6 from './dice.js';
 
-function Player(name) {
-  this.name = name;
-  this.score = 0;
-}
-
-Game.prototype.addPlayers = function(...playerObjects) {
-  this.players.push(...playerObjects);
-}
-
-Game.prototype.switchPlayers = function() {
-  if (this.currentPlayerIndex + 1 != this.maxPlayers) {
-    this.currentPlayerIndex += 1;
-  } else if (this.currentPlayerIndex + 1 == this.maxPlayers) {
-    this.currentPlayerIndex = 0;
-  }
-}
-
-function rollD6() {
-  return Math.floor(Math.random() * (7 - 1) + 1);
-}
-
-Game.prototype.calculateScore = function(points) {
-  if (points !== 1) {
-    this.currentScore += points;
-  } else if (points === 1) {
-    this.currentScore = 0;
-    this.switchPlayers();
-  }
-}
-
-Game.prototype.totalScore = function() {
-  this.players[this.currentPlayerIndex].score += this.currentScore;
-  this.currentScore = 0;
-}
-
-// User Interface Logic ----------
-displayGameInfo = function(game) {
+function displayGameInfo(game) {
   $("#current-player").show();
   $("#player-name").text(`Current Player: ${game.players[game.currentPlayerIndex].name}`);
   $("#current-score").text(`Current score: ${game.currentScore}`);
