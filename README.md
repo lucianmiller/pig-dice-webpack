@@ -1,12 +1,12 @@
 # Pig Dice
 
-#### Object-Oriented JavaScript Practice for Epicodus, 8/9/2021
+#### Webpack Practice for Epicodus, 9/20/2021
 
 #### By Lucian Miller
 
 ## Description
 
-Pig Dice is a folk game where two or more players take turns to roll a dice as many times as they wish. Players add up their points they roll. Rolling a 1 looses all the points you've rolled for that turn, and it becomes the second players turn. First to reach 100 is the winner! Gather some friends and play some Pig Dice! This game was created to practice objects and prototypes in JavaScript.
+Pig Dice is a folk game where two or more players take turns to roll a dice as many times as they wish. Players add up their points they roll. Rolling a 1 looses all the points you've rolled for that turn, and it becomes the second players turn. First to reach 100 is the winner! Gather some friends and play some Pig Dice! This game was originally created to practice objects and prototypes in JavaScript, but has been refactored to practice webpack.
 
 ## Setup/Installation Requirements
 
