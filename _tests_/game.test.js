@@ -28,4 +28,13 @@ describe('Game', () => {
     expect(newGame.players[0]).toEqual(player1);
     expect(newGame.players[1]).toEqual(player2);
   });
+
+  test('should switch between the players stored in Game object', () => {
+    const player1 = new Player("Sam");
+    const player2 = new Player ("Sally");
+    newGame.addPlayers(player1, player2);
+    expect(newGame.currentPlayerIndex).toEqual(0);
+    newGame.switchPlayers();
+    expect(newGame.currentPlayerIndex).toEqual(1);
+  });
 });
