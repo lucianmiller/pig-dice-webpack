@@ -44,6 +44,7 @@ lucian.miller185@gmail.com
 * Bootstrap
 * Javascript
 * jQuery
+* webpack
 
 ### License
 
